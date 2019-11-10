@@ -41,7 +41,7 @@ public class SimulatorService {
             vehicleVsQuantity.put(vehicle, count);
         });
 
-        int distance = randomDistance.nextInt(10000);
+        int distance = randomDistance.nextInt(300);
         List<EstimatedPrice> estimatedPrices = new ArrayList<>();
         vehicleVsQuantity.forEach((vehicle, quantity) -> {
 
