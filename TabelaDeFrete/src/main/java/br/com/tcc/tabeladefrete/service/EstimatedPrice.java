@@ -7,6 +7,8 @@ public class EstimatedPrice {
     private VehicleType vehicleType;
     private Integer numberOfVehicle;
     private Integer distance;
+    private Integer rateId;
+    private String origin;
 
     public Double getEstimatedPrice() {
         return estimatedPrice;
@@ -38,5 +40,21 @@ public class EstimatedPrice {
 
     public void setDistance(Integer distance) {
         this.distance = distance;
+    }
+
+    public void setRateId(Integer id) {
+        this.rateId = id;
+    }
+
+    public Integer getRateId() {
+        return rateId;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getOrigin() {
+        return origin;
     }
 }
