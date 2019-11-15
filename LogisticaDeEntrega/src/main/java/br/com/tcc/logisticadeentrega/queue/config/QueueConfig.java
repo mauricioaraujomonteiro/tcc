@@ -42,7 +42,6 @@ public class QueueConfig {
     public JmsListenerContainerFactory jmsFactoryTopic(ConnectionFactory connectionFactory,
                                                        DefaultJmsListenerContainerFactoryConfigurer configurer) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
-        factory.setMaxMessagesPerTask(jmsMessagePerTask);
         factory.setConcurrency(jsmConcurrency);
         configurer.configure(factory, connectionFactory);
         factory.setPubSubDomain(true);

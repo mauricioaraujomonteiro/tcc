@@ -1,5 +1,6 @@
-package br.com.tcc.logisticadeentrega.queue.config.message;
+package br.com.tcc.logisticadeentrega.queue.message;
 
+import br.com.tcc.logisticadeentrega.entity.OrderState;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties
@@ -7,6 +8,7 @@ public class ShiptmentNotificationMessage {
     private String name;
     private String email;
     private String cellphone;
+    private OrderState orderState;
 
     public String getName() {
         return name;
@@ -38,6 +40,15 @@ public class ShiptmentNotificationMessage {
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", cellphone='" + cellphone + '\'' +
+                ", orderState=" + orderState +
                 '}';
+    }
+
+    public void setOrderState(OrderState orderState) {
+        this.orderState = orderState;
+    }
+
+    public OrderState getOrderState() {
+        return orderState;
     }
 }

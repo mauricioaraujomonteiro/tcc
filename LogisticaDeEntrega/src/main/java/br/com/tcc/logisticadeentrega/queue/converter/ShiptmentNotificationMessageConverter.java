@@ -1,4 +1,4 @@
-package br.com.tcc.logisticadeentrega.queue.config.converter;
+package br.com.tcc.logisticadeentrega.queue.converter;
 
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
