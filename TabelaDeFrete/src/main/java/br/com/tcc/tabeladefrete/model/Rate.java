@@ -1,5 +1,8 @@
 package br.com.tcc.tabeladefrete.model;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.persistence.*;
 
 @Entity(name = "tabela_de_frete")
@@ -12,6 +15,7 @@ public class Rate {
     private DistanceType distanceType;
     private Double weigth;
     @OneToOne
+    @NotFound(action= NotFoundAction.EXCEPTION)
     private VehicleType vehicleType;
     private Double tax;
     @GeneratedValue(strategy = GenerationType.AUTO)

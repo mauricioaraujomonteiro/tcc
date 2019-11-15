@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +25,9 @@ public class SimulatorService {
 
     public List<EstimatedPrice> simulate(SimulateDTO simulateDTO) {
         List<VehicleType> vehiclesvehicles = Lists.newArrayList(vehicleRepository.findAll());
+        if (vehiclesvehicles.isEmpty()) {
+            return null;
+        }
         return findBestOption(vehiclesvehicles, simulateDTO);
 }
 
@@ -60,7 +62,7 @@ public class SimulatorService {
                 estimatedPrice.setVehicleType(vehicle);
                 estimatedPrice.setNumberOfVehicle(quantity);
                 estimatedPrice.setDistance(distance);
-                estimatedPrice.setOrigin(ORIGIN.INTERNAL.name());
+                estimatedPrice.setOrigin(Origin.INTERNAL.name());
                 estimatedPrices.add(estimatedPrice);
             });
 

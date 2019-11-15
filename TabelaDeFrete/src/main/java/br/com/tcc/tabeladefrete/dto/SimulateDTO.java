@@ -1,11 +1,13 @@
 package br.com.tcc.tabeladefrete.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.validation.constraints.NotNull;
 
-@JsonIgnoreProperties
 public class SimulateDTO {
+    @NotNull
     private Double weight;
+    @NotNull
     private String zipCodeFrom;
+    @NotNull
     private String zipCodeTo;
 
     public Double getWeight() {

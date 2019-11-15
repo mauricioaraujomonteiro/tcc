@@ -4,6 +4,7 @@ import br.com.tcc.tabeladefrete.component.RateCreateComponent;
 import br.com.tcc.tabeladefrete.component.RateReadComponent;
 import br.com.tcc.tabeladefrete.dto.RateDTO;
 import br.com.tcc.tabeladefrete.model.Rate;
+import com.netflix.ribbon.proxy.annotation.Http;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,13 +33,17 @@ public class RateController {
     public ResponseEntity<?> createRate(@RequestBody RateDTO rateDTO) {
 
         Rate rate = rateDTO.convertToRate();
-        Rate savedRate = rateCreateComponent.save(rate);
+        try {
+            Rate savedRate = rateCreateComponent.save(rate);
+            if (null == savedRate) {
+                return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
 
-        if (null == savedRate) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(savedRate, HttpStatus.CREATED);
+
+        } catch (IllegalArgumentException ex) {
+            return new ResponseEntity<>(ex.getCause(), HttpStatus.BAD_REQUEST);
         }
-
-        return new ResponseEntity<>(savedRate, HttpStatus.CREATED);
     }
 
 }

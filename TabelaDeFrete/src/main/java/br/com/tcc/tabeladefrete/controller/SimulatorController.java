@@ -26,6 +26,9 @@ public class SimulatorController {
     public ResponseEntity<?> simulate(@RequestBody SimulateDTO simulateDTO) {
 
         List<EstimatedPrice> simulationResult = simulatorService.simulate(simulateDTO);
+        if (null == simulationResult) {
+            new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+        }
         return new ResponseEntity<>(simulationResult, HttpStatus.OK);
     }
 

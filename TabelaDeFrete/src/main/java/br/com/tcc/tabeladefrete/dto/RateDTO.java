@@ -3,24 +3,24 @@ package br.com.tcc.tabeladefrete.dto;
 import br.com.tcc.tabeladefrete.model.DistanceType;
 import br.com.tcc.tabeladefrete.model.Rate;
 import br.com.tcc.tabeladefrete.model.VehicleType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.validation.constraints.NotNull;
 
 @JsonIgnoreProperties
 public class RateDTO {
-    private Integer id;
+
+    @NotNull
     private Double priceByDistance;
+    @NotNull
     private DistanceType distanceType;
+    @NotNull
     private Double weigth;
+    @NotNull
     private VehicleType vehicleType;
+    @NotNull
     private Double tax;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Double getPriceByDistance() {
         return priceByDistance;
@@ -62,9 +62,9 @@ public class RateDTO {
         this.tax = tax;
     }
 
+    @JsonIgnore
     public Rate convertToRate() {
         Rate rate = new Rate();
-
         rate.setPriceByDistance(getPriceByDistance());
         rate.setDistanceType(getDistanceType());
         rate.setTax(getTax());

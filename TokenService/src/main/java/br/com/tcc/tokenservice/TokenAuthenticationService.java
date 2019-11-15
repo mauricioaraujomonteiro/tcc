@@ -11,8 +11,8 @@ import java.util.Collections;
 import java.util.Date;
 
 public class TokenAuthenticationService {
-    // EXPIRATION_TIME = 10 dias
-    static final long EXPIRATION_TIME = 860_000_000;
+    // TEN_MINUTES_EXPIRATION = 10 minutos
+    static final long TEN_MINUTES_EXPIRATION = 600000;
     static final String SECRET = "MySecret";
     static final String TOKEN_PREFIX = "Bearer";
     static final String HEADER_STRING = "Authorization";
@@ -20,7 +20,7 @@ public class TokenAuthenticationService {
     static void addAuthentication(HttpServletResponse response, String username) {
         String JWT = Jwts.builder()
                 .setSubject(username)
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .setExpiration(new Date(System.currentTimeMillis() + TEN_MINUTES_EXPIRATION))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
 

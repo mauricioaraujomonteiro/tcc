@@ -1,5 +1,5 @@
 package br.com.tcc.tabeladefrete.service;
 
-public enum ORIGIN {
+public enum Origin {
     INTERNAL, EXTERNAL
 }
