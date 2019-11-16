@@ -2,7 +2,6 @@ package br.com.tcc.logisticadeentrega.controller;
 
 import br.com.tcc.logisticadeentrega.component.ShipmentComponent;
 import br.com.tcc.logisticadeentrega.dto.OrderRequestDTO;
-import br.com.tcc.logisticadeentrega.entity.ShipmentOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
