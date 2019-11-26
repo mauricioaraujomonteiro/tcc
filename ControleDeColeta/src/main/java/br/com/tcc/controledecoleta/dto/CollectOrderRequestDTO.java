@@ -13,6 +13,7 @@ public class CollectOrderRequestDTO {
     private String driverName;
     private ShipmentType shipmentType;
     private Status status;
+    private String partnerName;
 
     public Origin getOrigin() {
         return origin;
@@ -84,5 +85,13 @@ public class CollectOrderRequestDTO {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getPartnerName() {
+        return partnerName;
+    }
+
+    public void setPartnerName(String partnerName) {
+        this.partnerName = partnerName;
     }
 }

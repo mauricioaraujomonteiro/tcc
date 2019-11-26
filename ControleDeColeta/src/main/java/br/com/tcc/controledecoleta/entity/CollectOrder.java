@@ -1,7 +1,5 @@
 package br.com.tcc.controledecoleta.entity;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -26,6 +24,8 @@ public class CollectOrder implements Serializable {
     private ShipmentType shipmentType;
     @Enumerated(EnumType.STRING)
     private Status status;
+    private String partnerName;
+    private String orderId;
 
     public Integer getId() {
         return id;
@@ -109,5 +109,21 @@ public class CollectOrder implements Serializable {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getPartnerName() {
+        return partnerName;
+    }
+
+    public void setPartnerName(String partnerName) {
+        this.partnerName = partnerName;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }

@@ -5,17 +5,28 @@ import br.com.tcc.tabeladefrete.model.Rate;
 import br.com.tcc.tabeladefrete.model.VehicleType;
 import br.com.tcc.tabeladefrete.repository.RateRepository;
 import br.com.tcc.tabeladefrete.repository.VehicleRepository;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
 public class SimulatorService {
     private final RateRepository rateRepository;
     private final VehicleRepository vehicleRepository;
+    private static Cache cache = CacheBuilder
+            .newBuilder()
+            .expireAfterWrite(10, TimeUnit.MINUTES)
+            .build();
+    private static final String CACHE_KEY_RATE = "RATE";
+    private static final String CACHE_KEY_VEHICLE = "VEHICLE";
 
     @Autowired
     public SimulatorService(final RateRepository rateRepository, final VehicleRepository vehicleRepository) {
@@ -24,15 +35,26 @@ public class SimulatorService {
     }
 
     public List<EstimatedPrice> simulate(SimulateDTO simulateDTO) {
-        List<VehicleType> vehiclesvehicles = Lists.newArrayList(vehicleRepository.findAll());
-        if (vehiclesvehicles.isEmpty()) {
+        LoggerFactory.getLogger(SimulatorService.class).info(System.getProperty("server.port"));
+        if (null == cache.getIfPresent(CACHE_KEY_VEHICLE)) {
+            List<VehicleType> vehicles = Lists.newArrayList(vehicleRepository.findAll());
+            cache.put(CACHE_KEY_VEHICLE, vehicles);
+        }
+
+        final List<VehicleType> vehicles = (List<VehicleType>)cache.getIfPresent(CACHE_KEY_VEHICLE);
+        if (vehicles.isEmpty()) {
             return null;
         }
-        return findBestOption(vehiclesvehicles, simulateDTO);
+        return findBestOption(vehicles, simulateDTO);
 }
 
     private List<EstimatedPrice> findBestOption(List<VehicleType> vehicles, SimulateDTO simulateDTO) {
-        ArrayList<Rate> rates = Lists.newArrayList(rateRepository.findAll());
+        if (null == cache.getIfPresent(CACHE_KEY_RATE)) {
+            ArrayList<Rate> rates = Lists.newArrayList(rateRepository.findAll());
+            cache.put(CACHE_KEY_RATE, rates);
+        }
+        final List<Rate> rates = (List<Rate>)cache.getIfPresent(CACHE_KEY_RATE);
+
         final Random randomDistance =  new Random(System.currentTimeMillis());
 
         Map<VehicleType, Integer> vehicleVsQuantity = new TreeMap<>(new VehicleComparator());
