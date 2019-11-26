@@ -8,6 +8,7 @@ import br.com.tcc.tabeladefrete.repository.VehicleRepository;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,7 @@ public class SimulatorService {
     }
 
     public List<EstimatedPrice> simulate(SimulateDTO simulateDTO) {
+        LoggerFactory.getLogger(SimulatorService.class).info(System.getProperty("server.port"));
         if (null == cache.getIfPresent(CACHE_KEY_VEHICLE)) {
             List<VehicleType> vehicles = Lists.newArrayList(vehicleRepository.findAll());
             cache.put(CACHE_KEY_VEHICLE, vehicles);
