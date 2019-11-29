@@ -2,7 +2,9 @@ package br.com.tcc.logisticadeentrega.controller;
 
 import br.com.tcc.logisticadeentrega.component.ShipmentComponent;
 import br.com.tcc.logisticadeentrega.dto.OrderRequestDTO;
+import br.com.tcc.logisticadeentrega.entity.ShipmentOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +23,11 @@ public class ShipmentController {
     @PostMapping(produces = "application/json", consumes = "application/json")
     public ResponseEntity<?> createOrder(@RequestBody OrderRequestDTO order) {
 
-        shipmentComponent.create(order);
-        return null;
+        final ShipmentOrder shipmentOrder = shipmentComponent.create(order);
+        if (null == shipmentOrder) {
+            new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(shipmentOrder, HttpStatus.CREATED);
     }
 
     @PutMapping(produces = "application/json", consumes = "application/json")

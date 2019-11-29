@@ -31,7 +31,7 @@ public class CollectController {
             CollectOrderResponseDTO response = new CollectOrderResponseDTO();
             response.setCreated(order.getOrderDate());
             response.setId(order.getId());
-            response.setStatus(order.getStatus());
+            response.setOrderId(order.getOrderId());
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (Exception ex) {
             return new ResponseEntity<>(ex.getCause(), HttpStatus.BAD_GATEWAY);

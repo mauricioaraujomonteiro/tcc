@@ -1,6 +1,7 @@
 package br.com.tcc.logisticadeentrega.entity;
 
 public enum OrderState {
+    CREATED("SHIPPED"),
     SHIPPED("SHIPPED"),
     ORDERED("ORDERED"),
     COLLECTED("COLLECTED"),

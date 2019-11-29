@@ -24,7 +24,7 @@ public class ShipmentEventMessageConsumer {
     @JmsListener(destination = SHIPMENT_STATE, containerFactory = "jmsFactoryTopic")
     public void onReceiverQueue(String message) {
         ShiptmentNotificationMessage shiptmentNotificationMessage = new Gson().fromJson(message, ShiptmentNotificationMessage.class);
-        System.out.println(Thread.currentThread().getId());
+        System.out.println("Instancia 2");
         LOG.info(String.format("Send notification to the customer %s", shiptmentNotificationMessage));
     }
 

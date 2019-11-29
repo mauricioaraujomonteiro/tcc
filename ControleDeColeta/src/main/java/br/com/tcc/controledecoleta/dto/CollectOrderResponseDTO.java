@@ -9,8 +9,7 @@ import java.util.Date;
 public class CollectOrderResponseDTO {
     private Integer id;
     private Date created;
-    private Status status;
-
+    private String orderId;
 
     public Integer getId() {
         return id;
@@ -28,11 +27,11 @@ public class CollectOrderResponseDTO {
         this.created = created;
     }
 
-    public Status getStatus() {
-        return status;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public String getOrderId() {
+        return orderId;
     }
 }

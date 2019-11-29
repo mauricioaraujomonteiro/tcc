@@ -5,7 +5,7 @@ import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 
-@Entity(name = "tabela_de_frete")
+@Entity(name = "rate_control")
 public class Rate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +13,6 @@ public class Rate {
     private Double priceByDistance;
     @Enumerated(EnumType.STRING)
     private DistanceType distanceType;
-    private Double weigth;
     @OneToOne
     @NotFound(action= NotFoundAction.EXCEPTION)
     private VehicleType vehicleType;
@@ -39,14 +38,6 @@ public class Rate {
 
     public void setDistanceType(DistanceType distanceType) {
         this.distanceType = distanceType;
-    }
-
-    public Double getWeigth() {
-        return weigth;
-    }
-
-    public void setWeigth(Double weigth) {
-        this.weigth = weigth;
     }
 
     public VehicleType getVehicleType() {
