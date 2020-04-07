@@ -70,7 +70,6 @@ public class RateDTO {
         rate.setTax(getTax());
         rate.setPriceByDistance(getPriceByDistance());
         rate.setVehicleType(getVehicleType());
-        rate.setWeigth(getWeigth());
 
         return rate;
     }
